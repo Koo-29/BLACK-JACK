@@ -212,3 +212,11 @@ int playerOption(char choice){
     return player_total;
 }
 
+void displayRules(){
+  cout << "\n--- Blackjack Rules ---\n";
+    cout << "1. The goal is to get as close to 21 without exceeding it.\n";
+    cout << "2. Face cards are worth 10, aces can be 1 or 11.\n";
+    cout << "3. You play against the dealer, who also aims for 21.\n";
+    cout << "4. If you exceed 21, you bust and lose the round.\n";
+    cout << "-----------------------\n" << endl;
+}

@@ -9,7 +9,7 @@ using namespace std;
 
 extern int player_total,dealer_total;
 
-
+void displayRules();
 void initDeck();
 void shuffler();
 char getCard();
