@@ -1,115 +1,115 @@
 #include "game_Rules.h"
-vector<char> player_drawCard;
-vector<char> deck;
-char card_1, card_2, card_3, card_4;
+vector<string> player_drawCard;
+vector<string> deck;
+string card_1, card_2, card_3, card_4;
 
 void initDeck()
 {
   deck = {
-      'A',
-      '1',
-      '2',
-      '3',
-      '4',
-      '5',
-      '6',
-      '7',
-      '8',
-      '9',
-      'J',
-      'Q',
-      'K',
-      'A',
-      '1',
-      '2',
-      '3',
-      '4',
-      '5',
-      '6',
-      '7',
-      '8',
-      '9',
-      'J',
-      'Q',
-      'K',
-      'A',
-      '1',
-      '2',
-      '3',
-      '4',
-      '5',
-      '6',
-      '7',
-      '8',
-      '9',
-      'J',
-      'Q',
-      'K',
-      'A',
-      '1',
-      '2',
-      '3',
-      '4',
-      '5',
-      '6',
-      '7',
-      '8',
-      '9',
-      'J',
-      'Q',
-      'K',
-      'A',
-      '1',
-      '2',
-      '3',
-      '4',
-      '5',
-      '6',
-      '7',
-      '8',
-      '9',
-      'J',
-      'Q',
-      'K',
-      'A',
-      '1',
-      '2',
-      '3',
-      '4',
-      '5',
-      '6',
-      '7',
-      '8',
-      '9',
-      'J',
-      'Q',
-      'K',
-      'A',
-      '1',
-      '2',
-      '3',
-      '4',
-      '5',
-      '6',
-      '7',
-      '8',
-      '9',
-      'J',
-      'Q',
-      'K',
-      'A',
-      '1',
-      '2',
-      '3',
-      '4',
-      '5',
-      '6',
-      '7',
-      '8',
-      '9',
-      'J',
-      'Q',
-      'K',
+      u8"\u2666A",
+      u8"\u26660",
+      u8"\u26662",
+      u8"\u26663",
+      u8"\u26664",
+      u8"\u26665",
+      u8"\u26666",
+      u8"\u26667",
+      u8"\u26668",
+      u8"\u26669",
+      u8"\u2666J",
+      u8"\u2666Q",
+      u8"\u2666K",
+      u8"\u2663A",
+      u8"\u26630",
+      u8"\u26632",
+      u8"\u26633",
+      u8"\u26634",
+      u8"\u26635",
+      u8"\u26636",
+      u8"\u26637",
+      u8"\u26638",
+      u8"\u26639",
+      u8"\u2663J",
+      u8"\u2663Q",
+      u8"\u2663K",
+      u8"\u2665A",
+      u8"\u26650",
+      u8"\u26652",
+      u8"\u26653",
+      u8"\u26654",
+      u8"\u26655",
+      u8"\u26656",
+      u8"\u26657",
+      u8"\u26658",
+      u8"\u26659",
+      u8"\u2665J",
+      u8"\u2665Q",
+      u8"\u2665K",
+      u8"\u2660A",
+      u8"\u26600",
+      u8"\u26602",
+      u8"\u26603",
+      u8"\u26604",
+      u8"\u26605",
+      u8"\u26606",
+      u8"\u26607",
+      u8"\u26608",
+      u8"\u26609",
+      u8"\u2660J",
+      u8"\u2660Q",
+      u8"\u2660K",
+      u8"\u2666A",
+      u8"\u26660",
+      u8"\u26662",
+      u8"\u26663",
+      u8"\u26664",
+      u8"\u26665",
+      u8"\u26666",
+      u8"\u26667",
+      u8"\u26668",
+      u8"\u26669",
+      u8"\u2666J",
+      u8"\u2666Q",
+      u8"\u2666K",
+      u8"\u2663A",
+      u8"\u26630",
+      u8"\u26632",
+      u8"\u26633",
+      u8"\u26634",
+      u8"\u26635",
+      u8"\u26636",
+      u8"\u26637",
+      u8"\u26638",
+      u8"\u26639",
+      u8"\u2663J",
+      u8"\u2663Q",
+      u8"\u2663K",
+      u8"\u2665A",
+      u8"\u26650",
+      u8"\u26652",
+      u8"\u26653",
+      u8"\u26654",
+      u8"\u26655",
+      u8"\u26656",
+      u8"\u26657",
+      u8"\u26658",
+      u8"\u26659",
+      u8"\u2665J",
+      u8"\u2665Q",
+      u8"\u2665K",
+      u8"\u2660A",
+      u8"\u26600",
+      u8"\u26602",
+      u8"\u26603",
+      u8"\u26604",
+      u8"\u26605",
+      u8"\u26606",
+      u8"\u26607",
+      u8"\u26608",
+      u8"\u26609",
+      u8"\u2660J",
+      u8"\u2660Q",
+      u8"\u2660K",
   };
 }
 
@@ -120,26 +120,26 @@ void shuffler()
     swap(deck[i], deck[rand() % 104]);
 }
 
-char getCard()
+string getCard()
 {
-  char card = deck.front();
+  string card = deck.front();
   deck.erase(deck.begin());
   return card;
 }
 
-int charToInt(char card)
+int charToInt(string card)
 {
   int cardInInt;
-  if (card == 'J' || card == 'Q' || card == 'K')
+  if (card.back() == 'J' || card.back() == 'Q' || card.back() == 'K' || card.back() == '0')
   {
     cardInInt = 10;
   }
 
-  else if (card == 'A')
+  else if (card.back() == 'A')
     cardInInt = 11;
 
   else
-    cardInInt = card - '0';
+    cardInInt = card.back() - '0';
 
   return cardInInt;
 }
@@ -158,12 +158,12 @@ int adjustForAce(int total)
 
 void playerTurn()
 {
-  card_1 = 'A';
-  card_2 = '2';
+  card_1 = getCard();
+  card_2 = getCard();
   cout << "Your's hand cards: " << card_1 << " " << card_2 << endl;
   player_drawCard.push_back(card_1);
   player_drawCard.push_back(card_2);
-  aceCount = (card_1 == 'A') + (card_2 == 'A');
+  aceCount = (card_1.back() == '0' == 'A') + (card_2.back() == '0' == 'A');
   player_total = charToInt(card_1) + charToInt(card_2);
   player_total = adjustForAce(player_total);
   cout << "Your hand total value is " << player_total << endl;
@@ -208,7 +208,7 @@ void dealerOption()
   cout << "Dealer reveals hidden card: " << card_3 << " and " << card_4 << endl;
   while (dealer_total < 17)
   {
-    char new_card = getCard();
+    string new_card = getCard();
     cout << "Dealer hits and draws a new card " << new_card << endl;
     dealer_total += charToInt(new_card);
   }
@@ -228,8 +228,8 @@ int playerOption(char choice)
   }
   if (choice == 'H')
   {
-    char new_card = getCard();
-    if (new_card == 'A')
+    string new_card = getCard();
+    if (new_card.back() == '0' == 'A')
       aceCount++;
     player_drawCard.push_back(new_card);
     cout << "You draw a new card " << new_card << endl;
