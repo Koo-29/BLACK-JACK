@@ -1,6 +1,7 @@
 #include "game_Rules.h"
 
-int player_total = 0, dealer_total = 0, aceCount = 0;
+int player_total = 0, dealer_total = 0, aceCount = 0, playerScore = 0, dealerScore = 0;
+vector<string> player_drawCard;
 
 int main()
 {
@@ -26,21 +27,30 @@ int main()
     case 2:
       initDeck();
       shuffler();
-      dealerTurn();
-      playerTurn();
       do
       {
-        cout << "Do you want to hit(H) or sit(S) ? ";
-        cin >> choice;
-        playerOption(choice);
-
-        if (choice == 'S' || player_total > 21)
+        dealerTurn();
+        playerTurn();
+        do
         {
-          break;
-        }
-      } while (true);
-      dealerOption();
-      checkWinner(player_total, dealer_total);
+          cout << "Do you want to hit(H) or sit(S) ? ";
+          cin >> choice;
+          playerOption(choice);
+
+          if (choice == 'S' || player_total > 21)
+          {
+            player_drawCard.clear();
+            break;
+          }
+        } while (true);
+        dealerOption();
+        checkWinner(player_total, dealer_total);
+      } while (playerScore < 3 && dealerScore < 3);
+      if (playerScore > dealerScore)
+        cout << "You are the winner!\n";
+      else
+        cout << "You lost!\n";
+      playerScore = 0, dealerScore = 0;
       break;
 
     case 3:
