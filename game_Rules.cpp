@@ -1,5 +1,4 @@
 #include "game_Rules.h"
-vector<string> player_drawCard;
 vector<string> deck;
 string card_1, card_2, card_3, card_4;
 
@@ -146,13 +145,11 @@ int charToInt(string card)
 
 int adjustForAce(int total)
 {
-  cout << aceCount;
   if (total > 21 && aceCount > 0)
   {
     total -= 10;
     aceCount--;
   }
-  cout << aceCount;
   return total;
 }
 
@@ -160,6 +157,7 @@ void playerTurn()
 {
   card_1 = getCard();
   card_2 = getCard();
+  cout << "************************\n";
   cout << "Your's hand cards: " << card_1 << " " << card_2 << endl;
   player_drawCard.push_back(card_1);
   player_drawCard.push_back(card_2);
@@ -176,24 +174,33 @@ void checkWinner(int player_total, int dealer_total)
     cout << "It's a tie!\n";
   }
 
-  else if (player_total > dealer_total && player_total < 21)
+  else if (player_total > dealer_total && player_total <= 21)
   {
     cout << "You wins!\n";
+    playerScore += 1;
   }
 
-  else if (player_total < dealer_total && dealer_total < 21)
+  else if (player_total < dealer_total && dealer_total <= 21)
   {
     cout << "Dealer wins!\n";
+    dealerScore += 1;
   }
 
-  else if (player_total > 21 && dealer_total < 21)
+  else if (player_total > 21 && dealer_total <= 21)
   {
     cout << "You are bust!\n";
+    playerScore -= 1;
   }
   else
   {
     cout << "Dealer bust! You wins!\n";
+    dealerScore -= 1;
+    playerScore += 1;
   }
+  cout << "************************\n";
+  cout << "Player's score: " << playerScore << endl;
+  cout << "Dealer's score: " << dealerScore << endl;
+  cout << "************************\n";
 }
 
 void dealerTurn()
@@ -201,10 +208,12 @@ void dealerTurn()
   card_3 = getCard();
   card_4 = getCard();
   dealer_total = charToInt(card_3) + charToInt(card_4);
+  cout << "************************\n";
   cout << "Dealer's card " << " [Hidden]" << " " << card_4 << endl;
 }
 void dealerOption()
 {
+  cout << "************************\n";
   cout << "Dealer reveals hidden card: " << card_3 << " and " << card_4 << endl;
   while (dealer_total < 17)
   {
@@ -236,6 +245,7 @@ int playerOption(char choice)
     player_total += charToInt(new_card);
     player_total = adjustForAce(player_total);
     cout << "Your new total value is " << player_total << endl;
+    cout << "************************\n";
   }
   return player_total;
 }

@@ -4,7 +4,8 @@
 #include <vector>
 using namespace std;
 
-extern int player_total, dealer_total, aceCount;
+extern int player_total, dealer_total, aceCount, playerScore, dealerScore;
+extern vector<string> player_drawCard;
 
 void displayRules();
 void initDeck();
