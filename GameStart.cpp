@@ -1,12 +1,13 @@
 #include<iostream>
 #include<vector>
 #include "deck.h"
+#include<string>
 using namespace std;
 
 char card_1,card_2,card_3,card_4;
 int player_total,dealer_total;
 char choice;
-
+vector<char> player_drawCard;
 
 void playerTurn(){
   card_1 = getCard();
@@ -58,11 +59,19 @@ void dealerOption() {
 }
 int playerOption(char choice){
    if (choice == 'S'){
-      cout << "You sit with " << card_1 << " and " << card_2 << endl;
-      cout << "Your total value is " << player_total <<endl;
+      cout << "You sit with " << card_1 << " " << card_2 ;
+      for(int i = 0;i < player_drawCard.size();i++){
+        cout << " " << player_drawCard[i]  ;
+        if( i == player_drawCard.size() - 1){
+          cout << "\n";
+        }
+      }
+      
+      cout << "\nYour total value is " << player_total <<endl;
     }
     if (choice == 'H'){
       char new_card = getCard();
+      player_drawCard.push_back(new_card);
       cout << "You draw a new card " << new_card << endl;
       player_total += charToInt(new_card);
       cout << "Your new total value is " << player_total << endl;
@@ -71,6 +80,8 @@ int playerOption(char choice){
 }
 
 int main(){
+  string answer;
+  
   initDeck();
   shuffler();
   dealerTurn();
@@ -87,5 +98,6 @@ int main(){
   dealerOption();
   checkWinner(player_total,dealer_total);
 
+  
   
 }
